@@ -1,6 +1,14 @@
 #define M_PI 3.14159265358979323846  //Pi
+#define Bit0 0x01
+#define Bit1 0x02
+#define Bit2 0x04
+#define Bit3 0x08
+#define Bit4 0x10
+#define Bit5 0x20
+#define Bit6 0x40
+#define Bit7 0x80
 
-#include <math.h>
+#include "math.h"
 #include "TinyBitmap.h"
 
 TinyBitmap::TinyBitmap(int width, int height, char *framebuffer, int commandbytes, int bitmaplayout) //Constructor
@@ -10,15 +18,6 @@ TinyBitmap::TinyBitmap(int width, int height, char *framebuffer, int commandbyte
     _COMMANDBYTES = commandbytes;
     _BITMAPLAYOUT = bitmaplayout;
     _FRAMEBUFFER = framebuffer;
-
-    Bit0 = 0x01;
-    Bit1 = 0x02;
-    Bit2 = 0x04;
-    Bit3 = 0x08;
-    Bit4 = 0x10;
-    Bit5 = 0x20;
-    Bit6 = 0x40;
-    Bit7 = 0x80;
 }
 
 void TinyBitmap::DrawPixel(int x, int y)
@@ -87,8 +86,10 @@ void TinyBitmap::DrawPixel(int x, int y)
 
 void TinyBitmap::DrawLine(int x1, int y1, int x2, int y2)
 {
-    float xdiff_abs = abs(x2 - x1);
-    float ydiff_abs = abs(y2 - y1);
+    float xdiff_abs = (x2 - x1);
+    if(xdiff_abs < 0) xdiff_abs *= -1;
+    float ydiff_abs = (y2 - y1);
+    if(ydiff_abs < 0) ydiff_abs *= -1;
 
     float steps;
     if (xdiff_abs >= ydiff_abs) steps = xdiff_abs;
@@ -744,7 +745,7 @@ void TinyBitmap::DrawText(int x, int y, char *CharArray, bool UseLargeFont) //re
                 }
             }
 
-            xOffset += (LetterWidth * 2) + 1;
+            xOffset += (LetterWidth * 2) + 2;
         }
 
         else {
@@ -781,4 +782,3 @@ void TinyBitmap::ClearScreen()
         _FRAMEBUFFER[i] = 0x00;
     }
 }
-
