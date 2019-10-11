@@ -16,6 +16,7 @@
 #ifndef TINYBITMAP_H_
 #define TINYBITMAP_H_
 
+
 class TinyBitmap
 {
 private:
@@ -24,15 +25,15 @@ private:
     int _COMMANDBYTES;
     int _BITMAPLAYOUT;
     char *_FRAMEBUFFER;
-
-    char Bit0;
-    char Bit1;
-    char Bit2;
-    char Bit3;
-    char Bit4;
-    char Bit5;
-    char Bit6;
-    char Bit7;
+    
+//    const char Bit0 = 0x01;
+//    const char Bit1 = 0x02;
+//    const char Bit2 = 0x04;
+//    const char Bit3 = 0x08;
+//    const char Bit4 = 0x10;
+//    const char Bit5 = 0x20;
+//    const char Bit6 = 0x40;
+//    const char Bit7 = 0x80;
     
 public:
     TinyBitmap(int width, int height, char *framebuffer, int commandbytes = 0, int bitmaplayout = 0x00);//Constructor; creates a bitmap-handler with the given size and layout, can also leave some space for command-bytes to control a display. The bitmap (char[]) itself has to be created seperately.
